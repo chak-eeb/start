@@ -12,27 +12,17 @@ import {
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
-  useColorScheme,
-  View,
 } from 'react-native';
 
-
-
-
-
+import HomeScreen from './src/screens/HomeScreen'
 const App= () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
- 
-
   return (
     <SafeAreaView >
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar  />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         >
-        <View><Text>hi there!</Text></View>
+        <HomeScreen />
       </ScrollView>
     </SafeAreaView>
   );
@@ -41,5 +31,4 @@ const App= () => {
 const styles = StyleSheet.create({
   
 });
-
 export default App;
