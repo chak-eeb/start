@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   nav: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#e5e5f7',
+    backgroundColor: '#edf2fb',
   },
   logo: {
     marginHorizontal: 5,
