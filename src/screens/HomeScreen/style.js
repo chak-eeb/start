@@ -17,9 +17,15 @@ const styles = StyleSheet.create({
     width: 40,
     resizeMode: 'contain',
   },
+  topCard: {},
   text: {
+    marginVertical: 10,
+    textAlign: 'center',
     color: 'black',
     fontSize: 20,
+  },
+  quoteBox: {
+    marginVertical: 10,
   },
 });
 

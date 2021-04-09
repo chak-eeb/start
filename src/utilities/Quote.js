@@ -13,7 +13,6 @@ function Quote({text, author}) {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-
     backgroundColor: '#ade8f4',
     marginVertical: 10,
     padding: 5,

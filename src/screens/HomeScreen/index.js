@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image} from 'react-native';
+import config from 'react-native-config';
 import styles from './style.js';
 import Quote from '../../utilities/Quote';
 
@@ -8,15 +9,17 @@ const year = date.getUTCFullYear();
 const month = date.getMonth() + 1;
 const day = date.getDate();
 const today = `${month}/${day}/${year}`;
-const apiURL = 'https://type.fit/api/quotes';
+const quoteApiUrl = config.QUOTE_API;
+const weatherApiUrl = config.WEATHER_API;
 
 const HomeScreen = () => {
+  console.log('configc', config.QUOTE_API);
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
-
+  const [temp, setTemp] = useState();
   const getQuotes = () => {
-    fetch(apiURL)
-      .then(function (response) {
+    fetch(quoteApiUrl)
+      .then(response => {
         return response.json();
       })
       .then(data => {
@@ -34,6 +37,27 @@ const HomeScreen = () => {
     getQuotes();
   }, []);
 
+  const getTemp = () => {
+    fetch(weatherApiUrl)
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        setTemp(
+          Math.abs(
+            data.data.timelines[0].intervals[0].values.temperature,
+          ).toFixed(),
+        );
+      })
+      .catch(e => {
+        console.warn(e);
+      });
+  };
+
+  useEffect(() => {
+    getTemp();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.nav}>
@@ -44,12 +68,19 @@ const HomeScreen = () => {
         <Image style={styles.menu} />
       </View>
       <View style={styles.topCard}>
-        <View>
-          <Text style={styles.text}>{today}</Text>
-          <Text>temp F</Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <Text style={styles.text}>Today is: {today}</Text>
+          <Text>{temp} °F</Text>
         </View>
         <View style={styles.quoteBox}>
-          <Text style={{textAlign: 'center'}}>Quote of The Day</Text>
+          <Text style={{textAlign: 'center', fontSize: 26}}>
+            Quote of The Day
+          </Text>
           <Quote text={quote} author={author} />
         </View>
       </View>
