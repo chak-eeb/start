@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, Text, Image} from 'react-native';
 import config from 'react-native-config';
 import styles from './style.js';
-import Quote from '../../utilities/Quote';
+import Quote from '../../components/Quote';
 
 const date = new Date();
 const year = date.getUTCFullYear();
